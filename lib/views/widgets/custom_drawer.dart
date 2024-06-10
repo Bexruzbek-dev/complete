@@ -32,17 +32,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (ctx) {
-                    return ToDoScreen(
-                      onThemeChanged: onThemeChanged,
-                      onImageChanged: onImageChanged,
-                    );
-                  },
-                ),
-              );
+            
             },
             title: const Text("Bosh sahifa"),
             trailing: const Icon(

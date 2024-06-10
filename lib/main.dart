@@ -1,10 +1,9 @@
-import 'package:complete/utils/theme.dart';
+import 'package:complete/view_models/users_viewmodel.dart';
+import 'package:complete/views/screens/login_screen.dart';
 import 'package:complete/views/screens/todo_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await AppConstants.init();
+void main() {
   runApp(const MyApp());
 }
 
@@ -16,17 +15,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void toggleThemeMode(bool value) async {
-    final themeMode = value ? ThemeMode.dark : ThemeMode.light;
-    await AppConstants.setThemeMode(themeMode);
-    setState(() {});
-  }
+  final usersViewModel = UsersViewmodel();
 
-  void changeImage(String image) async {
-    if (image.trim().isNotEmpty) {
-      await AppConstants.setImageUrl(image);
-      setState(() {});
-    }
+  bool isLogged = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    usersViewModel.checkLogin().then((value) {
+      setState(() {
+        isLogged = value;
+      });
+    });
   }
 
   @override
@@ -34,16 +35,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        colorSchemeSeed: Colors.blue,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.amber,
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
         ),
       ),
-      darkTheme: ThemeData.dark(),
-      themeMode: AppConstants.themeMode,
-      home: ToDoScreen(
-        onThemeChanged: toggleThemeMode,
-        onImageChanged: changeImage,
-      ),
+      home: isLogged ? const ToDoScreen() : const LoginScreen(),
     );
   }
 }

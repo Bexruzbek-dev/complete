@@ -9,13 +9,10 @@ import '../widgets/notes_widgets.dart';
 import '../widgets/plan_widgets.dart';
 
 class ToDoScreen extends StatefulWidget {
-  final ValueChanged<bool> onThemeChanged;
-  final ValueChanged<String> onImageChanged;
+
 
   const ToDoScreen({
     super.key,
-    required this.onThemeChanged,
-    required this.onImageChanged,
   });
 
   @override
@@ -210,10 +207,6 @@ class _ToDoScreenState extends State<ToDoScreen> {
             label: "Profile",
           ),
         ],
-      ),
-      drawer: CustomDrawer(
-        onThemeChanged: widget.onThemeChanged,
-        onImageChanged: widget.onImageChanged,
       ),
     );
   }

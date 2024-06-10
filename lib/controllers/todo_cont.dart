@@ -1,6 +1,3 @@
-
-
-
 import 'package:complete/models/todo.dart';
 
 class TodoController {
@@ -20,7 +17,11 @@ class TodoController {
 
   void add(String name, String date) {
     _todoList.add(
-      TodoModel(title: name, date: date, checkDone: false),
+      TodoModel(
+        title: name,
+        date: date,
+        checkDone: false,
+      ),
     );
   }
 
